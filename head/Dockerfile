@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
       git-merge-changelog help2man \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
-RUN git clone https://gitlab.com/nieper/unsyntax.git --depth 1
+RUN git clone https://gitlab.com/nieper/unsyntax.git
 WORKDIR /build/unsyntax
 # RUN git submodule update --init --recursive --depth 1
 RUN ./bootstrap
