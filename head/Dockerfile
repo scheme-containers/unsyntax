@@ -1,6 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
 FROM schemers/chibi:head
-RUN rm /usr/local/bin/scheme-banner
 RUN apt-get update && apt-get -y --no-install-recommends install \
       ca-certificates git \
       build-essential \
@@ -15,5 +14,9 @@ RUN ./bootstrap
 RUN ./configure
 RUN make
 RUN make install
-RUN ln -s unsyntax-scheme /usr/local/bin/scheme-banner
+
+FROM schemers/chibi:head
+COPY --from=build /usr/local/ /usr/local/
+RUN rm /usr/local/bin/scheme-banner \
+ && ln -s unsyntax-scheme /usr/local/bin/scheme-banner
 CMD ["scheme-banner"]
