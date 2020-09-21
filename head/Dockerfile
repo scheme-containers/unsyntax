@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM schemers/chibi:head
+FROM schemers/chibi:head AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
       ca-certificates git \
       build-essential \
