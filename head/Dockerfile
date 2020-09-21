@@ -4,13 +4,13 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
       ca-certificates git \
       build-essential \
       autoconf automake m4 \
-      git-merge-changelog help2man \
+      git-merge-changelog gnulib help2man \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
 RUN git clone https://gitlab.com/nieper/unsyntax.git
 WORKDIR /build/unsyntax
-# RUN git submodule update --init --recursive --depth 1
-RUN ./bootstrap
+RUN git submodule init
+RUN ./bootstrap --gnulib-srcdir=/usr/share/gnulib
 RUN ./configure
 RUN make
 RUN make install
